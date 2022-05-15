@@ -1,0 +1,18 @@
+"use strict";
+
+
+function define_html_elements() {
+    menu = document.querySelector(".menu");
+    screen = document.querySelector(".screen");
+    grid = document.querySelector(".grid");
+}
+
+window.onload = () => {
+
+    define_html_elements();
+
+    screen.style.width = `${document.documentElement.clientWidth - menu.clientWidth}px`;
+    setupListeners();
+    generate_grid();
+    setupMenu();
+}
