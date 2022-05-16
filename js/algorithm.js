@@ -1,4 +1,4 @@
-function clearGrid() {
+function cleararray() {
     clear_event(null);
 }
 
@@ -187,6 +187,61 @@ function sleep(ms)
 	return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+function Kruskal() {
+	fill_walls();
+	let nbAreas = 0;
+	let wallsList = [];
+
+	for (let i = 1; i < array.length - 1; i++)
+		for (let j = 1; j < array[0].length - 1; j++) {
+			if (i % 2 == 1 && j % 2 == 1) {
+				nbAreas++;
+				array[i][j] = nbAreas;
+				get_cell_from_x_y(i, j).classList.add("visited");
+			}
+
+			if ((i + j) % 2 == 1) {
+                wallsList.push([i, j]);
+            }
+		}
+
+	my_interval = window.setInterval(function() {
+		while (true) {
+			if (nbAreas == 1) {
+				clearInterval(my_interval);
+				clearVisited();
+				generating = false;
+				return;
+			}
+
+			let index = randomInt(0, wallsList.length -1);
+			let wall = wallsList[index];
+			wallsList.splice(index, 1);
+			let cell_pair;
+
+			if (array[wall[0] - 1][wall[1]] > 1)
+				cell_pair = [array[wall[0] - 1][wall[1]], array[wall[0] + 1][wall[1]]];
+			else
+				cell_pair = [array[wall[0]][wall[1] - 1], array[wall[0]][wall[1] + 1]];
+
+			if (cell_pair[0] != cell_pair[1]) {
+				for (let i = 1; i < array.length - 1; i += 2) {
+                    for (let j = 1; j < array[0].length - 1; j += 2) {
+                        if (array[i][j] == cell_pair[0]) {
+                            array[i][j] = cell_pair[1];
+                        }
+                    }
+                }
+
+				removeWall(wall[0], wall[1]);
+				get_cell_from_x_y(wall[0], wall[1]).classList.add("visited");
+				nbAreas--;
+				return;
+			}
+		}
+	}, 16);
+}
+
 function BinaryTree() {
 
     fill_walls();
@@ -210,11 +265,7 @@ function BinaryTree() {
             if (neighbours.length == 0) {
                 continue;
             }
-            //console.log(`cell: ${x},${y} && neighbours: ${neighbours.join("-")}`);
-
             cells.push([[x, y], neighbours]);
-            //connectCellsAir([x, y], neighbours[random]);
-            //await sleep(16);
         }
     }
 
@@ -282,7 +333,7 @@ function fix_start_and_target() {
     let target_temp = target_pos;
 
     if (start_temp[0] % 2 == 0) {
-        if (start_temp[0] == grid.length - 1) {
+        if (start_temp[0] == array.length - 1) {
             start_temp[0] -= 1;
         } else {
             start_temp[0] += 1;
@@ -290,7 +341,7 @@ function fix_start_and_target() {
     }
 
     if (start_temp[1] % 2 == 0) {
-        if (start_temp[1] == grid.length - 1) {
+        if (start_temp[1] == array.length - 1) {
             start_temp[1] += 1;
         } else {
             start_temp[1] -= 1;
@@ -298,7 +349,7 @@ function fix_start_and_target() {
     }
 
     if (target_temp[0] % 2 == 0) {
-		if (target_temp[0] == grid.length - 1) {
+		if (target_temp[0] == array.length - 1) {
             target_temp[0] -= 1;
         } else {
             target_temp[0] += 1;
@@ -328,6 +379,8 @@ function generate_maze() {
 
     generating = true;
 
+    clearInterval(interval);
+
     get_cell_from_x_y(start_pos[0], start_pos[1]).classList.remove("start");
     get_cell_from_x_y(start_temp[0], start_temp[1]).classList.add("start");
 
@@ -337,14 +390,16 @@ function generate_maze() {
     start_pos = start_temp;
     target_pos = target_temp;
 
-    grid_clean = false;
+    array_clean = false;
 
     const selected_value = document.querySelector("#algorithm").value;
 
     if (selected_value === "1") {
         DepthFirstSearch();
     } else if (selected_value === "2") {
-        BFS();
+        BinaryTree();
+    } else if (selected_value === "3") {
+        Kruskal();
     }
 
 }

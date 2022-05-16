@@ -23,15 +23,15 @@
 }
 
 .cell_2 {
-	background-color: rgb(255, 203, 143);
+	background-color: rgb(251, 237, 221);
 }
 
 .wall {
-	background-color: rgb(194, 36, 36);
+	background-color: rgb(105, 37, 1);
 }
 
 .visited {
-	background-color: rgba(54, 222, 83, 0.8);
+	background-color: rgba(180, 255, 192, 0.8);
 }
 
 .start {

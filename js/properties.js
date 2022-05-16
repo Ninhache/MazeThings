@@ -1,6 +1,6 @@
 "use strict";
 
-const initial_max_grid_size = 17;
+const initial_max_grid_size = 33;
 
 let menu;
 let screen;
@@ -16,3 +16,5 @@ let array;
 let grid_clean = true;
 let clicking = false;
 let generating = false;
+
+let interval;
