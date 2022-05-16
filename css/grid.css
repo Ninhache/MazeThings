@@ -1,0 +1,45 @@
+.grid {
+	z-index: 3;
+	background-color: red;
+}
+
+#my_table {
+	border-spacing: 0;
+	border-collapse: collapse;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: 4;
+}
+
+.cell {
+	z-index: 5;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.cell_1 {
+	background-color: rgb(255, 255, 255);
+}
+
+.cell_2 {
+	background-color: rgb(255, 203, 143);
+}
+
+.wall {
+	background-color: rgb(194, 36, 36);
+}
+
+.visited {
+	background-color: rgba(54, 222, 83, 0.8);
+}
+
+.start {
+	background-image: url("../ressources/svg/start.svg");
+	background-size: calc(100%) calc(100%);
+}
+
+.target {
+	background-image: url("../ressources/svg/target.svg");
+	background-size: calc(100%) calc(100%);
+}
