@@ -56,6 +56,28 @@ function generate_grid() {
 
     array = new Array(grid_size_x).fill(0).map(() => new Array(grid_size_y).fill(0));
 
+    start_pos = [Math.floor(grid_size_x / 8), Math.floor(grid_size_y / 8)];
+    target_pos = [Math.floor((7 * grid_size_x) / 8), Math.floor((7 * grid_size_y) / 8)];
+
+    if (start_pos[0] % 2 == 0) {
+        start_pos[0] += 1;
+    }
+
+	if (start_pos[1] % 2 == 0) {
+        start_pos[1] -= 1;
+    }
+
+	if (target_pos[0] % 2 == 0) {
+        target_pos[0] += 1;
+    }
+
+	if (target_pos[1] % 2 == 0) {
+        target_pos[1] -= 1;
+    }
+
+    get_cell_from_x_y(start_pos[0], start_pos[1]).classList.add("start");
+    get_cell_from_x_y(target_pos[0], target_pos[1]).classList.add("target");
+
     update_css();
 }
 
@@ -76,29 +98,29 @@ function get_x_y_from_cell(cell) {
 }
 
 function get_cell_from_x_y(x, y) {
-    return document.querySelector(`.x_${x}.y_${y}`);
+    return table.querySelector(`.x_${x}.y_${y}`);
 }
 
 function putWall(x, y) {
-    const cell = document.querySelector(`.x_${x}.y_${y}`);
+    get_cell_from_x_y(x, y).classList.add("wall");
     array[x][y] = 1;
-    cell.classList.add("wall");
 }
 
 function visitXY(x, y) {
-    const cell = document.querySelector(`.x_${x}.y_${y}`);
-    cell.classList.add("visited");
+    get_cell_from_x_y(x, y).classList.add("visited")
+}
+
+function get_visited_cell_from_x_y(x, y, distance) {
+    return table.querySelector(`.x_${x}.y_${y - distance}.visited`);	
 }
 
 function removeWall(x, y) {
-    const cell = document.querySelector(`.x_${x}.y_${y}`);
+    get_cell_from_x_y(x, y).classList.remove("wall");
     array[x][y] = 0;
-    cell.classList.remove("wall");
 }
 
 function removeVisit(x, y) {
-    const cell = document.querySelector(`.x_${x}.y_${y}`);
-    cell.classList.remove("visited");
+    get_cell_from_x_y(x, y).classList.remove("visited");
 }
 
 function click_event(event) {

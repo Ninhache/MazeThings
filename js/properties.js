@@ -6,6 +6,7 @@ let menu;
 let screen;
 let grid;
 let table;
+let select;
 
 let cell_size;
 let grid_size_x, grid_size_y;

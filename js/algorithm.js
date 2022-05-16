@@ -21,22 +21,24 @@ function fill_walls() {
     }
 }
 
+
+
 function getNeighboursNotVisited(x,y, distance) {
     const neighbour = [];
 
-    if ((y - distance) >= 0 && table.querySelector(`.x_${x}.y_${y - distance}.visited`) == null) {
+    if ((y - distance) >= 0 && get_visited_cell_from_x_y(x, y - distance) == null) {
         neighbour.push([x, y - distance]);
     }
 
-    if ((y + distance) < array[0].length && table.querySelector(`.x_${x}.y_${y + distance}.visited`) == null) {
+    if ((y + distance) < array[0].length && get_visited_cell_from_x_y(x, y + distance) == null) {
         neighbour.push([x, y + distance]);
     }
 
-    if ((x - distance) >= 0 && table.querySelector(`.x_${x - distance}.y_${y}.visited`) == null) {
+    if ((x - distance) >= 0 && get_visited_cell_from_x_y(x - distance, y) == null) {
         neighbour.push([x - distance, y]);
     }
 
-    if ((x + distance) < array.length && table.querySelector(`.x_${x + distance}.y_${y}.visited`) == null) {
+    if ((x + distance) < array.length && get_visited_cell_from_x_y(x + distance, y) == null) {
         neighbour.push([x + distance, y]);
     }
 
@@ -129,6 +131,7 @@ function connectCells(cell1, cell2) {
 }   
 
 function DepthFirstSearch() {
+    fill_walls();
     const stack = [[1,1]];
     removeWall(1,1);
 
@@ -164,11 +167,68 @@ function DepthFirstSearch() {
     
 }
 
+function fix_start_and_target() {
+    let start_temp = start_pos;
+    let target_temp = target_pos;
+
+    if (start_temp[0] % 2 == 0) {
+        if (start_temp[0] == grid.length - 1) {
+            start_temp[0] -= 1;
+        } else {
+            start_temp[0] += 1;
+        }
+    }
+
+    if (start_temp[1] % 2 == 0) {
+        if (start_temp[1] == grid.length - 1) {
+            start_temp[1] += 1;
+        } else {
+            start_temp[1] -= 1;
+        }
+    }
+
+    if (target_temp[0] % 2 == 0) {
+		if (target_temp[0] == grid.length - 1) {
+            target_temp[0] -= 1;
+        } else {
+            target_temp[0] += 1;
+        }
+	}
+
+	if (target_temp[1] % 2 == 0) {
+		if (target_temp[1] == 0) {
+            target_temp[1] += 1;
+        } else {
+			target_temp[1] -= 1;
+        }
+	}
+
+
+
+    return { start_temp, target_temp };
+}
+
 function generate_maze() {
+    
+    let { start_temp, target_temp } = fix_start_and_target();
 
     generating = true;
-    
-    let start_temp = start_pos;
-	let target_temp = target_pos;
+
+    get_cell_from_x_y(start_pos[0], start_pos[1]).classList.remove("start");
+    get_cell_from_x_y(start_temp[0], start_temp[1]).classList.add("start");
+
+    get_cell_from_x_y(start_pos[0], start_pos[1]).classList.remove("target");
+    get_cell_from_x_y(start_temp[0], start_temp[1]).classList.add("target");
+
+    start_pos = start_temp;
+    target_pos = target_temp;
+
+    grid_clean = false;
+
+    const selected_value = document.querySelector("#algorithm").value;
+
+    if (select === "1") {
+        DepthFirstSearch();
+    }
 
 }

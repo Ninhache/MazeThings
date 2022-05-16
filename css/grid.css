@@ -33,3 +33,13 @@
 .visited {
 	background-color: rgba(54, 222, 83, 0.8);
 }
+
+.start {
+	background-image: url("../ressources/svg/start.svg");
+	background-size: calc(100%) calc(100%);
+}
+
+.target {
+	background-image: url("../ressources/svg/target.svg");
+	background-size: calc(100%) calc(100%);
+}

@@ -20,6 +20,13 @@ function clear_event(event) {
     }
 }
 
+function change_event(event) {
+    generate_maze();
+}
+
 function setupMenu() {
+    
     menu.querySelector(".clear").addEventListener("click", clear_event);
+
+    select.addEventListener("change", change_event);
 }
