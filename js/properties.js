@@ -1,6 +1,6 @@
 "use strict";
 
-const initial_max_grid_size = 25;
+const initial_max_grid_size = 17;
 
 let menu;
 let screen;

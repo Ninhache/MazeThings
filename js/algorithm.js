@@ -26,6 +26,28 @@ function fill_walls() {
 function getNeighboursNotVisited(x,y, distance) {
     const neighbour = [];
 
+    if ((y - distance) >= 0 && table.querySelector(`.x_${x}.y_${y - distance}.visited`) == null) {
+        neighbour.push([x, y - distance]);
+    }
+
+    if ((y + distance) < array[0].length && table.querySelector(`.x_${x}.y_${y + distance}.visited`) == null) {
+        neighbour.push([x, y + distance]);
+    }
+
+    if ((x - distance) >= 0 && table.querySelector(`.x_${x - distance}.y_${y}.visited`) == null) {
+        neighbour.push([x - distance, y]);
+    }
+
+    if ((x + distance) < array.length && table.querySelector(`.x_${x + distance}.y_${y}.visited`) == null) {
+        neighbour.push([x + distance, y]);
+    }
+
+    return neighbour;
+}
+/*
+function getNeighboursNotVisited(x,y, distance) {
+    const neighbour = [];
+
     if ((y - distance) >= 0 && get_visited_cell_from_x_y(x, y - distance) == null) {
         neighbour.push([x, y - distance]);
     }
@@ -43,7 +65,7 @@ function getNeighboursNotVisited(x,y, distance) {
     }
 
     return neighbour;
-}
+}*/
 
 function getNeighbours(x,y, distance) {
 
@@ -101,7 +123,7 @@ function randomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function connectCells(cell1, cell2) {
+function connectCellsAir(cell1, cell2) {
     let x1 = cell1[0];
     let y1 = cell1[1];
     let x2 = cell2[0];
@@ -128,7 +150,94 @@ function connectCells(cell1, cell2) {
             }
         }
     }
+}
+
+
+function connectCellsWall(cell1, cell2) {
+    let x1 = cell1[0];
+    let y1 = cell1[1];
+    let x2 = cell2[0];
+    let y2 = cell2[1];
+
+    if (x1 == x2) {
+        if (y1 < y2) {
+            for (let i = y1; i <= y2; i++) {
+                putWall(x1, i);
+            }
+        } else {
+            for (let i = y2; i <= y1; i++) {
+                putWall(x1, i);
+            }
+        }
+    } else if (y1 == y2) {
+        if (x1 < x2) {
+            for (let i = x1; i <= x2; i++) {
+                putWall(i, y1);
+            }
+        } else {
+            for (let i = x2; i <= x1; i++) {
+                putWall(i, y1);
+            }
+        }
+    }
 }   
+
+function sleep(ms)
+{
+	return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function BinaryTree() {
+
+    fill_walls();
+
+    let cells = [];
+    
+    for (let y = 1; y < array[0].length - 0; y = y + 2) {
+        for (let x = 1; x < array.length - 0; x = x + 2) {
+            
+            //let neighbours = getAvailailbeNeighbours(x,y,2);
+            let neighbours = [];
+
+            if (y - 1 > 0) {
+                neighbours.push([x, y - 1]);
+            }
+
+            if (x - 1 > 0) {
+                neighbours.push([x - 1, y]);
+            }
+
+            if (neighbours.length == 0) {
+                continue;
+            }
+            //console.log(`cell: ${x},${y} && neighbours: ${neighbours.join("-")}`);
+
+            cells.push([[x, y], neighbours]);
+            //connectCellsAir([x, y], neighbours[random]);
+            //await sleep(16);
+        }
+    }
+
+    interval = window.setInterval(function() {
+        if (cells.length === 0) {
+            clearInterval(interval);
+            generating = false;
+            clearVisited();
+            return;
+        } else {
+            let cell = cells.shift();
+            
+            let currentCell = cell[0];
+            let neighbours = cell[1];
+            
+            let random = randomInt(0, neighbours.length - 1);
+            let neighbour = neighbours[random];
+
+            connectCellsAir(currentCell, neighbour);
+        }
+    }, 16)
+    
+}
 
 function DepthFirstSearch() {
     fill_walls();
@@ -138,6 +247,7 @@ function DepthFirstSearch() {
     interval = window.setInterval(function() {
         if (stack.length == 0) {
             clearInterval(interval);
+            clearVisited();
             generating = false;
             return;
         } else {
@@ -150,8 +260,8 @@ function DepthFirstSearch() {
                 for (let i = 0; i < neighbours.length; ++i) {
                     const neighbour = neighbours[i];
                     
-                    visitXY(neighbour[0], neighbour[1]);
-                    connectCells(cell, neighbour);
+                    putVisit(neighbour[0], neighbour[1]);
+                    connectCellsAir(cell, neighbour);
 
                     if (i != randomIdx) {
                         stack.push(neighbour);
@@ -208,6 +318,10 @@ function fix_start_and_target() {
     return { start_temp, target_temp };
 }
 
+function clearVisited() {
+    table.querySelectorAll(".visited").forEach(element => element.classList.remove("visited"));
+}
+
 function generate_maze() {
     
     let { start_temp, target_temp } = fix_start_and_target();
@@ -217,8 +331,8 @@ function generate_maze() {
     get_cell_from_x_y(start_pos[0], start_pos[1]).classList.remove("start");
     get_cell_from_x_y(start_temp[0], start_temp[1]).classList.add("start");
 
-    get_cell_from_x_y(start_pos[0], start_pos[1]).classList.remove("target");
-    get_cell_from_x_y(start_temp[0], start_temp[1]).classList.add("target");
+    get_cell_from_x_y(target_pos[0], target_pos[1]).classList.remove("target");
+    get_cell_from_x_y(target_temp[0], target_temp[1]).classList.add("target");
 
     start_pos = start_temp;
     target_pos = target_temp;
@@ -227,8 +341,10 @@ function generate_maze() {
 
     const selected_value = document.querySelector("#algorithm").value;
 
-    if (select === "1") {
+    if (selected_value === "1") {
         DepthFirstSearch();
+    } else if (selected_value === "2") {
+        BFS();
     }
 
 }

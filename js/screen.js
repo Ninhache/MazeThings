@@ -106,7 +106,7 @@ function putWall(x, y) {
     array[x][y] = 1;
 }
 
-function visitXY(x, y) {
+function putVisit(x, y) {
     get_cell_from_x_y(x, y).classList.add("visited")
 }
 
