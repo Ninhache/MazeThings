@@ -205,10 +205,10 @@ function Kruskal() {
             }
 		}
 
-	my_interval = window.setInterval(function() {
+	interval = window.setInterval(function() {
 		while (true) {
 			if (nbAreas == 1) {
-				clearInterval(my_interval);
+				clearInterval(interval);
 				clearVisited();
 				generating = false;
 				return;
