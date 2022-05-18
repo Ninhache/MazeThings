@@ -9,7 +9,6 @@ function define_html_elements() {
 }
 
 window.onload = () => {
-
     define_html_elements();
 
     screen.style.width = `${document.documentElement.clientWidth - menu.clientWidth}px`;

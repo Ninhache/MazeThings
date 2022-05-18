@@ -145,16 +145,16 @@ function click_event(event) {
             start_pos = [x, y];
             
             if (array[x][y] != 1) {
-                table.querySelectorAll(".start").forEach(item => item.classList.remove("start"))
+                table.querySelector(".start").classList.remove("start");
                 cell.classList.add("start");
             }
 
             
         } else if (movingTarget && !cell.classList.contains("start")) {
-            start_pos = [x, y];
+            target_pos = [x, y];
             
             if (array[x][y] != 1) {
-                table.querySelectorAll(".target").forEach(item => item.classList.remove("target"))
+                table.querySelector(".target").classList.remove("target");
                 cell.classList.add("target");
             }
 
