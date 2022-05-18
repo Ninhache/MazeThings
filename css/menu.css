@@ -1,4 +1,7 @@
 .menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     position: fixed;
     left: 0%;
     top: 0%;
@@ -7,11 +10,19 @@
     width: 15em;
 }
 
-.menu form {
+.menu .form {
     display: flex;
     flex-direction: column;
 }
 
-.menu form > * {
+.menu .form > div {
     margin: 1em;
+}
+
+.menu > .footer {
+    margin: 1em;
+}
+
+.menu .form > div > * {
+    width: 100%;
 }

@@ -3,10 +3,28 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Test Labyrinthe</title>
+    <title>Maze Things</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     
+    <meta property="og:locale" content="en_US"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https://ninhache.fr/MazeThings/">
+    <meta property="og:image" content="https://ninhache.fr/MazeThings/resources/images/Social.png">
+    <meta property="og:image:url" content="https://ninhache.fr/MazeThings/resources/images/Social.png">
+    <meta property="og:image:secure_url" content="https://ninhache.fr/MazeThings/resources/images/Social.png">
+    <meta property="og:image:type" content="image/png"/>
+    <meta property="og:image:width" content="1920"/>
+    <meta property="og:image:height" content="1080"/>
+    <meta property="og:title" content="Maze Things"/>
+    <meta property="og:description" content="Maze Things.">
+    <meta name="twitter:title" content="Maze Things">
+    <meta name="twitter:description" content="Maze Things.">
+    <meta name="twitter:image" content="https://ninhache.fr/MazeThings/resources/images/Social.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@NinhacheUwU">
+    <meta property="og:site_name" content="Ninhache's Maze Things">
     
+
     <link rel='stylesheet' type='text/css' media='screen' href='css/main.css'>
     <link rel='stylesheet' type='text/css' media='screen' href='css/menu.css'>
     <link rel='stylesheet' type='text/css' media='screen' href='css/screen.css'>
@@ -23,38 +41,37 @@
 <body>
     <div class="menu">
 
-        <!--
+        
         <div class="form">
 
-            <span>Generate Methods</span>
-            <select name="algorithm" id="algorithm">
-                <option hidden selected>Choose pls</option>
-                <option value="1">DepthFirstSearch</option>
-                <option value="2">BinaryTree</option>
-                <option value="3">Kruskal</option>
-            </select>
+            <div>
+                <span>Generate Methods</span>
+                <select name="algorithm" id="algorithm">
+                    <option value="0" hidden selected>Custom</option>
+                    <option value="1">DepthFirstSearch</option>
+                    <option value="2">BinaryTree</option>
+                    <option value="3">Kruskal</option>
+                </select>
+            </div>
 
-            <span>Solve Methods</span>
-            <select name="algorithm" id="algorithm">
-                <option hidden selected>Choose pls</option>
-                <option value="1">A*</option>
-                <option value="2">Dijkstra</option>
-            </select>
+            <div>
+                <span>Solve Methods</span>
+                <select name="algorithm" id="algorithm">
+                    <option value="1">A*</option>
+                    <option value="2">Dijkstra</option>
+                </select>
+            </div>
+
+            <div>
+                <input type="submit" value="Start Solving" class="submit"/>
+                <button class="clear">Clear</button>    
+            </div>
+
         </div>
-        -->
-        
-        <form action="#">
-            <label for="algorithm">Labyrinth Algorithm</label>
-            <select name="algorithm" id="algorithm">
-                <option hidden selected>Choose pls</option>
-                <option value="1">DepthFirstSearch</option>
-                <option value="2">BinaryTree</option>
-                <option value="3">Kruskal</option>
-            </select>
-            <input type="submit" value="Submit" class="submit"/>
-            <button class="clear">Clear</button>
-        </form>
-        
+
+        <div class="footer">
+            <a href="https://ninhache.fr/">Discover my website</a>
+        </div>
         
     </div>
 
