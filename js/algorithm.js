@@ -383,6 +383,10 @@ function generate_maze() {
 
     let { start_temp, target_temp } = fix_start_and_target();
 
+    if (target_temp[0] === start_temp[0] && target_temp[1] === start_temp[1]) {
+        target_temp[0] += 2;
+    }
+
     get_cell_from_x_y(start_pos[0], start_pos[1]).classList.remove("start");
     get_cell_from_x_y(start_temp[0], start_temp[1]).classList.add("start");
 
