@@ -12,7 +12,9 @@
     <link rel='stylesheet' type='text/css' media='screen' href='css/screen.css'>
     <link rel='stylesheet' type='text/css' media='screen' href='css/grid.css'>
 
-    <script src='js/algorithm.js'></script>
+    <script src='js/solveMaze.js'></script>
+    <script src='js/algorithmUtils.js'></script>
+    <script src='js/generateMaze.js'></script>-
     <script src='js/menu.js'></script>
     <script src='js/properties.js'></script>
     <script src='js/screen.js'></script>
@@ -20,9 +22,30 @@
 </head>
 <body>
     <div class="menu">
+
+        <!--
+        <div class="form">
+
+            <span>Generate Methods</span>
+            <select name="algorithm" id="algorithm">
+                <option hidden selected>Choose pls</option>
+                <option value="1">DepthFirstSearch</option>
+                <option value="2">BinaryTree</option>
+                <option value="3">Kruskal</option>
+            </select>
+
+            <span>Solve Methods</span>
+            <select name="algorithm" id="algorithm">
+                <option hidden selected>Choose pls</option>
+                <option value="1">A*</option>
+                <option value="2">Dijkstra</option>
+            </select>
+        </div>
+        -->
+        
         <form action="#">
             <label for="algorithm">Labyrinth Algorithm</label>
-            <select name="algorithms" id="algorithm">
+            <select name="algorithm" id="algorithm">
                 <option hidden selected>Choose pls</option>
                 <option value="1">DepthFirstSearch</option>
                 <option value="2">BinaryTree</option>
@@ -31,7 +54,7 @@
             <input type="submit" value="Submit" class="submit"/>
             <button class="clear">Clear</button>
         </form>
-
+        
         
     </div>
 

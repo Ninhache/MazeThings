@@ -170,7 +170,7 @@ function click_event(event) {
 
 
         if (generating) {
-            select.value = "0";
+            selectGenerate.value = "0";
         }
 
         generating = false;

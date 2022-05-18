@@ -22,6 +22,12 @@ function clear_event(event) {
     }
 }
 
+function submit_event(event) {
+    event.preventDefault();
+
+    console.log("aya submit");
+}
+
 function change_event(event) {
     event.preventDefault();
     generate_maze();
@@ -31,5 +37,7 @@ function setupMenu() {
     
     menu.querySelector(".clear").addEventListener("click", clear_event);
 
-    select.addEventListener("change", change_event);
+    selectGenerate.addEventListener("change", change_event);
+
+    submit.addEventListener("click", submit_event);
 }
