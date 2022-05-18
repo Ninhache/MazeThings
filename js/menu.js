@@ -1,6 +1,8 @@
-
+"use strict";
 
 function clear_event(event) {
+    event?.preventDefault();
+    clearInterval(interval);
     grid_clean = false;
     if (!grid_clean) {
         
@@ -21,6 +23,7 @@ function clear_event(event) {
 }
 
 function change_event(event) {
+    event.preventDefault();
     generate_maze();
 }
 

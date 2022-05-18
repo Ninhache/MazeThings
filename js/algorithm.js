@@ -1,3 +1,5 @@
+"use strict";
+
 function cleararray() {
     clear_event(null);
 }
@@ -329,10 +331,12 @@ function DepthFirstSearch() {
 }
 
 function fix_start_and_target() {
-    let start_temp = start_pos;
-    let target_temp = target_pos;
+    let start_temp = [...start_pos];
+    let target_temp = [...target_pos];
 
-    if (start_temp[0] % 2 == 0) {
+    console.log(`BEFORE FIX: start_pos: ${start_temp}, target_pos: ${target_temp}`);
+
+    if (start_temp[0] % 2 === 0) {
         if (start_temp[0] == array.length - 1) {
             start_temp[0] -= 1;
         } else {
@@ -340,31 +344,31 @@ function fix_start_and_target() {
         }
     }
 
-    if (start_temp[1] % 2 == 0) {
-        if (start_temp[1] == array.length - 1) {
+    if (start_temp[1] % 2 === 0) {
+        if (start_temp[1] === 0) {
             start_temp[1] += 1;
         } else {
             start_temp[1] -= 1;
         }
     }
 
-    if (target_temp[0] % 2 == 0) {
-		if (target_temp[0] == array.length - 1) {
+    if (target_temp[0] % 2 === 0) {
+		if (target_temp[0] === array[0].length - 1) {
             target_temp[0] -= 1;
         } else {
             target_temp[0] += 1;
         }
 	}
 
-	if (target_temp[1] % 2 == 0) {
-		if (target_temp[1] == 0) {
+	if (target_temp[1] % 2 === 0) {
+		if (target_temp[1] === 0) {
             target_temp[1] += 1;
         } else {
 			target_temp[1] -= 1;
         }
 	}
 
-
+    console.log(`AFTER FIX: start_pos: ${start_temp}, target_pos: ${target_temp}`);
 
     return { start_temp, target_temp };
 }
@@ -375,11 +379,16 @@ function clearVisited() {
 
 function generate_maze() {
     
-    let { start_temp, target_temp } = fix_start_and_target();
-
+    clear_event(null);
     generating = true;
 
     clearInterval(interval);
+
+
+    let { start_temp, target_temp } = fix_start_and_target();
+
+    console.log(`ACTUAL : X:${start_pos[0]} Y:${start_pos[1]}`);
+    console.log(`FUTUR : X:${start_temp[0]} Y:${start_temp[1]}`);
 
     get_cell_from_x_y(start_pos[0], start_pos[1]).classList.remove("start");
     get_cell_from_x_y(start_temp[0], start_temp[1]).classList.add("start");
@@ -390,11 +399,13 @@ function generate_maze() {
     start_pos = start_temp;
     target_pos = target_temp;
 
-    array_clean = false;
+    grid_clean = false;
 
     const selected_value = document.querySelector("#algorithm").value;
 
-    if (selected_value === "1") {
+    if (selected_value == "0") {
+        clearInterval(interval);
+    } if (selected_value === "1") {
         DepthFirstSearch();
     } else if (selected_value === "2") {
         BinaryTree();

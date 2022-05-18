@@ -16,5 +16,7 @@ let array;
 let grid_clean = true;
 let clicking = false;
 let generating = false;
+let movingStart = false;
+let movingTarget = false;
 
 let interval;

@@ -1,6 +1,5 @@
 "use strict";
 
-
 function update_css() {
     grid.style.width = `${(cell_size * grid_size_x)}px`;
     grid.style.height = `${(cell_size * grid_size_y)}px`;
@@ -94,7 +93,7 @@ function get_x_y_from_event(event) {
     let x = Math.floor(event.layerX / cell_size);
     let y = Math.floor(event.layerY / cell_size);
 
-    return {x, y};
+    return {x:x, y:y};
 }
 
 function get_x_y_from_cell(cell) {
@@ -102,7 +101,7 @@ function get_x_y_from_cell(cell) {
     let x = cell.classList.item(2).split("_")[1];
     let y = cell.classList.item(3).split("_")[1];
 
-    return {x, y};
+    return {x:parseInt(x), y:parseInt(y)};
 }
 
 function get_cell_from_x_y(x, y) {
@@ -137,17 +136,45 @@ function click_event(event) {
     const cell = event.target;
 
     if (clicking && cell.classList.contains("cell")) {
+        clearInterval(interval);
     
         const {x, y} = get_x_y_from_cell(cell);
         console.log(`x: ${x}, y: ${y}`);
         
-        if (array[x][y] == 0) {
-            array[x][y] = 1;
-            cell.classList.add("wall");
+        if (movingStart && !cell.classList.contains("target")) {
+            start_pos = [x, y];
+            
+            if (array[x][y] != 1) {
+                table.querySelectorAll(".start").forEach(item => item.classList.remove("start"))
+                cell.classList.add("start");
+            }
+
+            
+        } else if (movingTarget && !cell.classList.contains("start")) {
+            start_pos = [x, y];
+            
+            if (array[x][y] != 1) {
+                table.querySelectorAll(".target").forEach(item => item.classList.remove("target"))
+                cell.classList.add("target");
+            }
+
+            
         } else {
-            array[x][y] = 0;
-            cell.classList.remove("wall");
+            
+            if (array[x][y] == 1 && !cell.classList.contains("target") && !cell.classList.contains("start")) {
+                removeWall(x, y);
+            } else if (array[x][y] == 0 && !cell.classList.contains("target") && !cell.classList.contains("start")) {
+                putWall(x, y);
+            }
         }
+
+
+        if (generating) {
+            select.value = "0";
+        }
+
+        generating = false;
+        
     }
 
 }
@@ -156,6 +183,8 @@ function cancel_click_event(event) {
     event.preventDefault();
 
     clicking = false;
+    movingStart = false;
+    movingTarget = false;
 }
 
 
@@ -164,6 +193,14 @@ function setupListeners() {
 
     screen.addEventListener('mousedown', event => {
         event.preventDefault();
+        
+        const cellClassList = event.target.classList;
+
+        if (cellClassList.contains("start")) {
+            movingStart = true;
+        } else if (cellClassList.contains("target")) {
+            movingTarget = true;
+        }
 
         clicking = true;
 
