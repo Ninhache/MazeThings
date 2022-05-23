@@ -29,6 +29,7 @@
     <link rel='stylesheet' type='text/css' media='screen' href='css/menu.css'>
     <link rel='stylesheet' type='text/css' media='screen' href='css/screen.css'>
     <link rel='stylesheet' type='text/css' media='screen' href='css/grid.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='css/solver.css'>
 
     <script src='js/solveMaze.js'></script>
     <script src='js/algorithmUtils.js'></script>
@@ -46,7 +47,7 @@
 
             <div>
                 <span>Generate Methods</span>
-                <select name="algorithm" id="algorithm">
+                <select name="algorithm" id="algorithmGenerate">
                     <option value="0" hidden selected>Custom</option>
                     <option value="1">DepthFirstSearch</option>
                     <option value="2">BinaryTree</option>
@@ -56,7 +57,7 @@
 
             <div>
                 <span>Solve Methods</span>
-                <select name="algorithm" id="algorithm">
+                <select name="algorithm" id="algorithmSolve">
                     <option value="1">A*</option>
                     <option value="2">Dijkstra</option>
                 </select>

@@ -1,18 +1,27 @@
 "use strict";
 
-const initial_max_grid_size = 33;
+const initial_max_grid_size = 15;
 
 let menu;
 let screen;
 let grid;
 let table;
-let selectGenerate;
+let selectGenerate, selectSolve;
 let submit;
 
+// grid
 let cell_size;
 let grid_size_x, grid_size_y;
 let start_pos, target_pos;
 let array;
+
+// solve 
+let nodeListIndex;
+let nodeList;
+let pathList;
+let pathListIndex;
+let found = false;
+let path = false;
 
 let grid_clean = true;
 let clicking = false;

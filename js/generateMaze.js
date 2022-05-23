@@ -32,10 +32,12 @@ function Kruskal() {
 			wallsList.splice(index, 1);
 			let cell_pair;
 
-			if (array[wall[0] - 1][wall[1]] > 1)
-				cell_pair = [array[wall[0] - 1][wall[1]], array[wall[0] + 1][wall[1]]];
-			else
-				cell_pair = [array[wall[0]][wall[1] - 1], array[wall[0]][wall[1] + 1]];
+			if (array[wall[0] - 1][wall[1]] > 1) {
+                cell_pair = [array[wall[0] - 1][wall[1]], array[wall[0] + 1][wall[1]]];
+            }
+			else {
+                cell_pair = [array[wall[0]][wall[1] - 1], array[wall[0]][wall[1] + 1]];
+            }
 
 			if (cell_pair[0] != cell_pair[1]) {
 				for (let i = 1; i < array.length - 1; i += 2) {
@@ -166,7 +168,7 @@ function generate_maze() {
 
     grid_clean = false;
     
-    const selected_value = document.querySelector("#algorithm").value;
+    const selected_value = selectGenerate.value;
 
     if (selected_value == "0") {
         clearInterval(interval);

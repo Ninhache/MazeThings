@@ -5,7 +5,8 @@ function define_html_elements() {
     menu = document.querySelector(".menu");
     screen = document.querySelector(".screen");
     grid = document.querySelector(".grid");
-    selectGenerate = menu.querySelector("#algorithm")
+    selectGenerate = menu.querySelector("#algorithmGenerate")
+    selectSolve = menu.querySelector("#algorithmSolve")
     submit = menu.querySelector(".submit");
 }
 

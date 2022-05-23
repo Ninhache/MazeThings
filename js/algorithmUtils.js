@@ -202,6 +202,16 @@ function clearVisited() {
     table.querySelectorAll(".visited").forEach(element => element.classList.remove("visited"));
 }
 
+function clearpaths() {
+    table.querySelectorAll(".shortest_path, .cell_path").forEach(element => {
+        element.classList.remove("cell_path", "shortest_path");
+    });    
+}
+
 function sleep(ms) {
 	return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function distance(cell1, cell2) {
+    return Math.sqrt(Math.pow(cell2[0] - cell1[0], 2) + Math.pow(cell2[1] - cell1[1], 2));
 }

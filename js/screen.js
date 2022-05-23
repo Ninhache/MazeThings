@@ -110,7 +110,7 @@ function get_cell_from_x_y(x, y) {
 
 function putWall(x, y) {
     get_cell_from_x_y(x, y).classList.add("wall");
-    array[x][y] = 1;
+    array[x][y] = -1;
 }
 
 function putVisit(x, y) {
@@ -128,6 +128,13 @@ function removeWall(x, y) {
 
 function removeVisit(x, y) {
     get_cell_from_x_y(x, y).classList.remove("visited");
+}
+
+function getCellValue(x, y) {
+	if (x >= 0 && x < array.length && y >= 0 && y < array[0].length)
+		return array[x][y];
+
+	return -2;
 }
 
 function click_event(event) {
