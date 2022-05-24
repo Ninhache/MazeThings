@@ -7,22 +7,24 @@ function Kruskal() {
 
 	for (let i = 1; i < array.length - 1; i++)
 		for (let j = 1; j < array[0].length - 1; j++) {
-			if (i % 2 == 1 && j % 2 == 1) {
+			if (i % 2 === 1 && j % 2 === 1) {
 				nbAreas++;
 				array[i][j] = nbAreas;
-				get_cell_from_x_y(i, j).classList.add("visited");
+
 			}
 
-			if ((i + j) % 2 == 1) {
+			if ((i + j) % 2 === 1) {
                 wallsList.push([i, j]);
             }
 		}
 
 	interval = window.setInterval(function() {
 		while (true) {
-			if (nbAreas == 1) {
+			if (nbAreas === 1) {
 				clearInterval(interval);
 				clearVisited();
+                updateArray();
+                table.querySelectorAll(".cell").forEach(item => item.style.backgroundColor = "");
 				generating = false;
 				return;
 			}
@@ -32,24 +34,28 @@ function Kruskal() {
 			wallsList.splice(index, 1);
 			let cell_pair;
 
-			if (array[wall[0] - 1][wall[1]] > 1) {
+			if (array[wall[0] - 1][wall[1]] > -1) {
                 cell_pair = [array[wall[0] - 1][wall[1]], array[wall[0] + 1][wall[1]]];
             }
 			else {
                 cell_pair = [array[wall[0]][wall[1] - 1], array[wall[0]][wall[1] + 1]];
             }
 
-			if (cell_pair[0] != cell_pair[1]) {
+			if (cell_pair[0] !== cell_pair[1]) {
 				for (let i = 1; i < array.length - 1; i += 2) {
                     for (let j = 1; j < array[0].length - 1; j += 2) {
-                        if (array[i][j] == cell_pair[0]) {
+                        if (array[i][j] === cell_pair[0]) {
+
                             array[i][j] = cell_pair[1];
+                            //array[i][j] = 0;
+
                         }
                     }
                 }
 
 				removeWall(wall[0], wall[1]);
-				get_cell_from_x_y(wall[0], wall[1]).classList.add("visited");
+				//get_cell_from_x_y(wall[0], wall[1]).classList.add("visited");
+                fillFrom(wall[0], wall[1], `hsl(${(nbAreas * 5) %360}, 50%, 50%)`)
 				nbAreas--;
 				return;
 			}

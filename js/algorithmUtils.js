@@ -208,6 +208,67 @@ function clearpaths() {
     });    
 }
 
+function getNonColoredNeighbours(x, y, distance = 1, color = "Red") {
+    let neighbours = getNeighbours(x,y,distance);
+
+    let result = [];
+    for (let i = 0 ; i < neighbours.length ; i++) {
+        let htmlCell = get_cell_from_x_y(neighbours[i][0],neighbours[i][1]);
+        if (!htmlCell.classList.contains("wall") && !htmlCell.classList.contains("colored")) {
+            result.push(neighbours[i]);
+        }
+    }
+
+    return result;
+}
+
+function updateArray() {
+    for (let i = 0 ; i < array.length ; i++) {
+        for (let j = 0 ; j < array[0].length ; j++) {
+            if (array[i][j] > -1) {
+                array[i][j] = 0;
+            }
+        }
+    }
+}
+
+/*
+function fillFrom(x,y) {
+    let list = getAvailailbeNeighbours(x,y,1)
+
+    for (let i = 0; i < list.length ; i++) {
+        let htmlCell = get_cell_from_x_y(list[i][0], list[i][1]);
+        htmlCell.classList.add("colored");
+        htmlCell.style.backgroundColor = "Red";
+    }
+    if (list[0]) {
+        fillFrom(list[0][0],list[0][1]);
+    }
+}*/
+
+
+function fillFrom(x, y, color = "Red") {
+
+    let toColor = getNonColoredNeighbours(x, y, 1);
+
+    do {
+        let cell = toColor.pop();
+        if (cell !== undefined) {
+            let htmlCell = get_cell_from_x_y(cell[0], cell[1]);
+
+            htmlCell.style.backgroundColor = color;
+            htmlCell.classList.add("colored");
+
+            toColor.push(...getNonColoredNeighbours(cell[0], cell[1], 1, color));
+        } else {
+            break;
+        }
+
+    } while (toColor.length !== 0);
+    table.querySelectorAll(".colored").forEach(item => item.classList.remove("colored"));
+}
+
+
 function sleep(ms) {
 	return new Promise(resolve => setTimeout(resolve, ms));
 }
