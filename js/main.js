@@ -17,4 +17,5 @@ window.onload = () => {
     setupListeners();
     generate_grid();
     setupMenu();
+    setupSelect();
 }
