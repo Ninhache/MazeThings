@@ -1,8 +1,11 @@
 "use strict";
 
 function update_css() {
-    grid.style.width = `${(cell_size * grid_size_x)}px`;
-    grid.style.height = `${(cell_size * grid_size_y)}px`;
+    //grid.style.width = `${(cell_size * grid_size_x)}px`;
+    //grid.style.height = `${(cell_size * grid_size_y)}px`;
+
+    grid.style.width = "100%";
+    grid.style.height = "100%";
 }
 
 function define_grid_properties() {
@@ -14,7 +17,7 @@ function define_grid_properties() {
         grid_size_x = initial_max_grid_size;
         grid_size_y = Math.floor(initial_max_grid_size / ratio);
 
-        if (grid_size_y %2 ==0) {
+        if (grid_size_y %2 === 0) {
             grid_size_y++;
         }
 
@@ -23,7 +26,7 @@ function define_grid_properties() {
         grid_size_y = initial_max_grid_size;
         grid_size_x = Math.floor(initial_max_grid_size * ratio);
 
-        if (grid_size_x %2 ==0) {
+        if (grid_size_x %2 === 0) {
             grid_size_x++;
         }
 
@@ -45,7 +48,7 @@ function generate_grid() {
             let cell = document.createElement("td");
             let className = "";
             
-            if((i + j)%2 == 0) {
+            if((i + j)%2 === 0) {
                 className = "cell cell_1";
             } else {
                 className = "cell cell_2";
@@ -66,19 +69,19 @@ function generate_grid() {
     start_pos = [Math.floor(grid_size_x / 8), Math.floor(grid_size_y / 8)];
     target_pos = [Math.floor((7 * grid_size_x) / 8), Math.floor((7 * grid_size_y) / 8)];
 
-    if (start_pos[0] % 2 == 0) {
+    if (start_pos[0] % 2 === 0) {
         start_pos[0] += 1;
     }
 
-	if (start_pos[1] % 2 == 0) {
+	if (start_pos[1] % 2 === 0) {
         start_pos[1] -= 1;
     }
 
-	if (target_pos[0] % 2 == 0) {
+	if (target_pos[0] % 2 === 0) {
         target_pos[0] += 1;
     }
 
-	if (target_pos[1] % 2 == 0) {
+	if (target_pos[1] % 2 === 0) {
         target_pos[1] -= 1;
     }
 
@@ -151,7 +154,7 @@ function click_event(event) {
         if (movingStart && !cell.classList.contains("target")) {
             start_pos = [x, y];
             
-            if (array[x][y] != 1) {
+            if (array[x][y] != -1) {
                 table.querySelector(".start").classList.remove("start");
                 cell.classList.add("start");
             }
@@ -160,7 +163,7 @@ function click_event(event) {
         } else if (movingTarget && !cell.classList.contains("start")) {
             target_pos = [x, y];
             
-            if (array[x][y] != 1) {
+            if (array[x][y] != -1) {
                 table.querySelector(".target").classList.remove("target");
                 cell.classList.add("target");
             }
@@ -168,9 +171,9 @@ function click_event(event) {
             
         } else {
             
-            if (array[x][y] == 1 && !cell.classList.contains("target") && !cell.classList.contains("start")) {
+            if (array[x][y] == -1 && !cell.classList.contains("target") && !cell.classList.contains("start")) {
                 removeWall(x, y);
-            } else if (array[x][y] == 0 && !cell.classList.contains("target") && !cell.classList.contains("start")) {
+            } else if (array[x][y] === 0 && !cell.classList.contains("target") && !cell.classList.contains("start")) {
                 putWall(x, y);
             }
         }

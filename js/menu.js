@@ -11,7 +11,7 @@ function clear_event(event) {
         for (let i = 0 ; i < array.length ; i++) {
             for (let j = 0 ; j < array[0].length ; j++) {
                 
-                if (array[i][j] >= 1) {
+                if (array[i][j] >= -1) {
                     removeWall(i, j);
                     get_cell_from_x_y(i, j).classList.remove("cell_path");
                     get_cell_from_x_y(i, j).classList.remove("shortest_path");
