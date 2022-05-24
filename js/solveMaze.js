@@ -13,7 +13,6 @@ function solver_interval() {
     interval = window.setInterval(function() {
 
         if (!path) {
-            console.log("SOLVER PAH FALSE")
             get_cell_from_x_y(nodeList[nodeListIndex][0], nodeList[nodeListIndex][1]).classList.add("cell_path");
             nodeListIndex++;
             if (nodeListIndex == nodeList.length) {
@@ -25,16 +24,15 @@ function solver_interval() {
                 }
             }
         } else {
-            console.log("SOLVER ELSE")
-            if (pathList == PathListIndex) {
+            if (pathList === PathListIndex) {
                 get_cell_from_x_y(target_pos[0], target_pos[1]).classList.add("shortest_path");
                 clearInterval(interval);
                 return;
             }
 
-            get_cell_from_x_y(pathList[PathListIndex][0], pathList[PathListIndex][1]).classList.remove("cell_path");
-            get_cell_from_x_y(pathList[PathListIndex][0], pathList[PathListIndex][1]).classList.add("shortest_path");
-            PathListIndex++;
+            get_cell_from_x_y(pathList[pathListIndex][0], pathList[pathListIndex][1]).classList.remove("cell_path");
+            get_cell_from_x_y(pathList[pathListIndex][0], pathList[pathListIndex][1]).classList.add("shortest_path");
+            pathListIndex++;
         }
     }, 10);
 }
@@ -58,9 +56,9 @@ function solve_maze() {
 
     const selected_value = selectSolve.value;
 
-    if (selected_value == "1") {
+    if (selected_value === "1") {
         astar();
-    } else if (selected_value == "2") {
+    } else if (selected_value === "2") {
         dijkstra();
     }
 }
