@@ -3,6 +3,14 @@
     margin: 0;
 }
 
-.screen {
-    background-color: blue;
+:root {
+    --white:#FFFFFE;
+    --grey: #e2e5e7;
+    --green:#2CB67D;
+    --purple:#7F5AF0;
+    --soft-black: #38383d;
+    --black:#16161A;
 }
+
+
+

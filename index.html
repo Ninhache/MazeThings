@@ -31,6 +31,7 @@
     <link rel='stylesheet' type='text/css' media='screen' href='css/grid.css'>
     <link rel='stylesheet' type='text/css' media='screen' href='css/solver.css'>
 
+    <script src='js/select.js'></script>
     <script src='js/solveMaze.js'></script>
     <script src='js/algorithmUtils.js'></script>
     <script src='js/generateMaze.js'></script>-
@@ -46,7 +47,7 @@
         <div class="form">
 
             <div>
-                <span>Generate Methods</span>
+                <h3>Generate Methods</h3>
                 <select name="algorithm" id="algorithmGenerate">
                     <option value="0" hidden selected>Custom</option>
                     <option value="1">DepthFirstSearch</option>
@@ -56,7 +57,7 @@
             </div>
 
             <div>
-                <span>Solve Methods</span>
+                <h3>Solve Methods</h3>
                 <select name="algorithm" id="algorithmSolve">
                     <option value="1">A*</option>
                     <option value="2">Dijkstra</option>
@@ -64,14 +65,17 @@
             </div>
 
             <div>
-                <input type="submit" value="Start Solving" class="submit"/>
-                <button class="clear">Clear</button>    
+                <button style="margin-bottom: 20px;" class="submit">Start solving</button>
+                <button class="clear">Clear</button>
             </div>
 
         </div>
 
         <div class="footer">
-            <a href="https://ninhache.fr/">Discover my website</a>
+            <a href="https://ninhache.fr/">
+                <img src="resources/svg/link.svg" alt="link">
+                <span>Discover my website</span>
+            </a>
         </div>
         
     </div>

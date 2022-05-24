@@ -1,6 +1,6 @@
 .grid {
 	z-index: 3;
-	background-color: red;
+	background-color: var(--black);
 }
 
 #my_table {
@@ -19,27 +19,27 @@
 }
 
 .cell_1 {
-	background-color: rgb(255, 255, 255);
+	background-color: var(--white);
 }
 
 .cell_2 {
-	background-color: rgb(251, 237, 221);
+	background-color: var(--grey);
 }
 
 .wall {
-	background-color: rgb(105, 37, 1);
+	background-color: var(--purple);
 }
 
 .visited {
-	background-color: rgba(180, 255, 192, 0.8);
+	background-color: var(--green);
 }
 
 .start {
-	background-image: url("../ressources/svg/start.svg");
+	background-image: url("../resources/svg/start.svg");
 	background-size: calc(100%) calc(100%);
 }
 
 .target {
-	background-image: url("../ressources/svg/target.svg");
+	background-image: url("../resources/svg/target.svg");
 	background-size: calc(100%) calc(100%);
 }
