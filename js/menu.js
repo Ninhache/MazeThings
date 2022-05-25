@@ -13,8 +13,11 @@ function clear_event(event) {
                 
                 if (array[i][j] >= -1) {
                     removeWall(i, j);
-                    get_cell_from_x_y(i, j).classList.remove("cell_path");
-                    get_cell_from_x_y(i, j).classList.remove("shortest_path");
+                    const htmlElement = get_cell_from_x_y(i, j);
+                    htmlElement.classList.remove("cell_path");
+                    htmlElement.classList.remove("shortest_path");
+                    htmlElement.style.backgroundColor = "";
+
                 }
 
                 removeVisit(i,j);
