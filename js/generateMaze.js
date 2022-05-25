@@ -149,6 +149,15 @@ function DepthFirstSearch() {
     
 }
 
+
+
+function RecursiveDivision() {
+    enclose();
+
+    // .. todo
+
+}
+
 function generate_maze() {
     
     clear_event(null);
@@ -176,7 +185,7 @@ function generate_maze() {
     
     const selected_value = selectGenerate.value;
 
-    if (selected_value == "0") {
+    if (selected_value === "0") {
         clearInterval(interval);
     } if (selected_value === "1") {
         DepthFirstSearch();
@@ -184,6 +193,8 @@ function generate_maze() {
         BinaryTree();
     } else if (selected_value === "3") {
         Kruskal();
+    } else if (selected_value === "4") {
+        RecursiveDivision();
     }
 
 }

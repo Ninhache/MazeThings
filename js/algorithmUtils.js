@@ -17,7 +17,7 @@ function fill() {
 function fill_walls() {
     for (let i = 0; i < array.length; i++) {
         for (let j = 0; j < array[0].length; j++) {
-            if (i%2 == 0 | j%2 ==0) {
+            if (i % 2 === 0 || j % 2 === 0) {
                 putWall(i, j);
             }
         }
@@ -50,20 +50,24 @@ function getNeighbours(x,y, distance) {
 
     const neighbour = [];
 
+    // top
     if ((y - distance) >= 0) {
         neighbour.push([x, y - distance]);
     }
 
+    // right
+    if ((x + distance) < array.length) {
+        neighbour.push([x + distance, y]);
+    }
+
+    // bot
     if ((y + distance) < array[0].length) {
         neighbour.push([x, y + distance]);
     }
 
+    // left
     if ((x - distance) >= 0) {
         neighbour.push([x - distance, y]);
-    }
-
-    if ((x + distance) < array.length) {
-        neighbour.push([x + distance, y]);
     }
 
     return neighbour;
@@ -76,7 +80,7 @@ function getAvailailbeNeighbours(x,y, distance) {
     for (let i = 0; i < neighbours.length; i++) {
         let neighbour = neighbours[i];
         if (neighbour[0] > 0 && neighbour[0] < array.length && neighbour[1] > 0 && neighbour[1] < array[0].length) {
-            if (array[neighbour[0]][neighbour[1]] == 0) {
+            if (array[neighbour[0]][neighbour[1]] === 0) {
                 availableNeighbours.push(neighbour);
             }
         }
@@ -98,7 +102,7 @@ function enclose() {
 }
 
 function randomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+    return Math.floor(Math.random() * (Math.floor(max) - Math.ceil(min) + 1)) + Math.ceil(min);
 }
 
 function connectCellsAir(cell1, cell2) {
@@ -107,7 +111,7 @@ function connectCellsAir(cell1, cell2) {
     let x2 = cell2[0];
     let y2 = cell2[1];
 
-    if (x1 == x2) {
+    if (x1 === x2) {
         if (y1 < y2) {
             for (let i = y1; i <= y2; i++) {
                 removeWall(x1, i);
@@ -117,7 +121,7 @@ function connectCellsAir(cell1, cell2) {
                 removeWall(x1, i);
             }
         }
-    } else if (y1 == y2) {
+    } else if (y1 === y2) {
         if (x1 < x2) {
             for (let i = x1; i <= x2; i++) {
                 removeWall(i, y1);
@@ -136,7 +140,7 @@ function connectCellsWall(cell1, cell2) {
     let x2 = cell2[0];
     let y2 = cell2[1];
 
-    if (x1 == x2) {
+    if (x1 === x2) {
         if (y1 < y2) {
             for (let i = y1; i <= y2; i++) {
                 putWall(x1, i);
@@ -146,7 +150,7 @@ function connectCellsWall(cell1, cell2) {
                 putWall(x1, i);
             }
         }
-    } else if (y1 == y2) {
+    } else if (y1 === y2) {
         if (x1 < x2) {
             for (let i = x1; i <= x2; i++) {
                 putWall(i, y1);
@@ -164,7 +168,7 @@ function fix_start_and_target() {
     let target_temp = [...target_pos];
 
     if (start_temp[0] % 2 === 0) {
-        if (start_temp[0] == array[0].length - 1) {
+        if (start_temp[0] === array[0].length - 1) {
             start_temp[0] -= 1;
         } else {
             start_temp[0] += 1;
