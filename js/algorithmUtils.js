@@ -14,7 +14,7 @@ function fill() {
     }
 }
 
-function fill_walls() {
+function fillWalls() {
     for (let i = 0; i < array.length; i++) {
         for (let j = 0; j < array[0].length; j++) {
             if (i % 2 === 0 || j % 2 === 0) {
