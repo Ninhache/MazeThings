@@ -5,6 +5,7 @@
 function clear_event(event) {
     event?.preventDefault();
     clearInterval(interval);
+    resetAlgo();
     grid_clean = false;
     if (!grid_clean) {
         
