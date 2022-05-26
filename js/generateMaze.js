@@ -1,7 +1,7 @@
 "use strict";
 
 function Kruskal() {
-	fill_walls();
+	fillWalls();
 	let nbAreas = 0;
 	let wallsList = [];
 
@@ -34,11 +34,20 @@ function Kruskal() {
 			wallsList.splice(index, 1);
 			let cell_pair;
 
-			if (array[wall[0] - 1][wall[1]] > -1) {
-                cell_pair = [array[wall[0] - 1][wall[1]], array[wall[0] + 1][wall[1]]];
-            }
-			else {
-                cell_pair = [array[wall[0]][wall[1] - 1], array[wall[0]][wall[1] + 1]];
+			try {
+                if (array[wall[0] - 1][wall[1]] > -1) {
+                    cell_pair = [array[wall[0] - 1][wall[1]], array[wall[0] + 1][wall[1]]];
+                }
+                else {
+                    cell_pair = [array[wall[0]][wall[1] - 1], array[wall[0]][wall[1] + 1]];
+                }
+            } catch (err) {
+                clearInterval(interval);
+                clearVisited();
+                updateArray();
+                table.querySelectorAll(".cell").forEach(item => item.style.backgroundColor = "");
+                generating = false;
+                return;
             }
 
 			if (cell_pair[0] !== cell_pair[1]) {
@@ -65,7 +74,7 @@ function Kruskal() {
 
 function BinaryTree() {
 
-    fill_walls();
+    fillWalls();
 
     let cells = [];
     
@@ -112,7 +121,7 @@ function BinaryTree() {
 }
 
 function DepthFirstSearch() {
-    fill_walls();
+    fillWalls();
     const stack = [[1,1]];
     removeWall(1,1);
 
@@ -131,11 +140,11 @@ function DepthFirstSearch() {
             if (neighbours.length > 0) {
                 for (let i = 0; i < neighbours.length; ++i) {
                     const neighbour = neighbours[i];
-                    
+
                     putVisit(neighbour[0], neighbour[1]);
                     connectCellsAir(cell, neighbour);
 
-                    if (i != randomIdx) {
+                    if (i !== randomIdx) {
                         stack.push(neighbour);
                     }
                 }
@@ -149,6 +158,57 @@ function DepthFirstSearch() {
     
 }
 
+
+
+function Sidewinder() {
+
+    /*
+    // Not working but no worries..
+    fillWalls()
+
+    for (let i = 1; i + 1 < array.length ; i++) {
+        removeWall(i, 1);
+    }
+
+    for (let y = 3 ; y  < array[0].length ; y += 2) {
+        let run = [];
+
+        for (let x = 1; x + 1 < array.length ; x += 2) {
+            run.push([x,y])
+            if ((x+2) <= array.length && Math.random()%2==0) {
+                removeWall([x+1, y])
+                x+=2
+            } else {
+                removeWall(x, y-1)
+            }
+        }
+    }*/
+
+    /*
+    fill()
+
+    for (let i = 1; i + 1 < array.length ; i++) {
+        removeWall(i, 1);
+    }
+
+    for (let y = 3 ; y + 1 < array[0].length ; y = y+2) {
+        let run = [];
+
+        for (let x = 1; x + 1 < array.length ; x++) {
+            run.push(array[x][y]); //?
+            console.log(run)
+            if ((x+2) < array.length && Math.random()%2) {
+                connectCellsAir([x,y],[x+1,y]);
+            } else {
+                let random = randomInt(0, run.length);
+                let aboveCell = [run[random][0], run[random][1]-2];
+                connectCellsAir(run[random], aboveCell);
+                run = [];
+            }
+        }
+    }*/
+
+}
 
 
 function RecursiveDivision() {
@@ -195,6 +255,8 @@ function generate_maze() {
         Kruskal();
     } else if (selected_value === "4") {
         RecursiveDivision();
+    } else if (selected_value === "5") {
+        Sidewinder();
     }
 
 }
