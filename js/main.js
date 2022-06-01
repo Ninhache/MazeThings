@@ -18,4 +18,5 @@ window.onload = () => {
     generate_grid();
     setupMenu();
     setupSelect();
+    setupModal();
 }

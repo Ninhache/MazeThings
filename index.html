@@ -30,7 +30,9 @@
     <link rel='stylesheet' type='text/css' media='screen' href='css/screen.css'>
     <link rel='stylesheet' type='text/css' media='screen' href='css/grid.css'>
     <link rel='stylesheet' type='text/css' media='screen' href='css/solver.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='css/modal.css'>
 
+    <script src='js/modal.js'></script>
     <script src='js/select.js'></script>
     <script src='js/solveMaze.js'></script>
     <script src='js/algorithmUtils.js'></script>
@@ -69,23 +71,43 @@
 
             <div>
                 <button style="margin-bottom: 20px;" class="submit">Start solving</button>
-                <button class="clear">Clear</button>
+                <div class="settings">
+                    <button class="clear">Clear</button>
+                    <a class="settings gear">
+                        <img class="svg" src="resources/svg/gear.svg" alt="link">    
+                    </a>
+                </div>
             </div>
 
         </div>
 
         <div class="footer">
             <a href="https://ninhache.fr/">
-                <img src="resources/svg/link.svg" alt="link">
+                <img class="svg" src="resources/svg/link.svg" alt="link">
                 <span>Discover my website</span>
             </a>
         </div>
         
     </div>
 
+    <div hidden class="modal-container">
+        <div class="modal">
+            <div class="content">
+                <div>
+                    <h1>Work in progress..</h1>
+                </div>
+                <ul>
+                    <li><em>initial_max_grid_size</em></li>
+                    <li><em>intervalSpeed</em></li>
+                </ul>
+
+            </div>
+            <div class="closeButton"></div>
+        </div>
+    </div>
+
     <div class="screen">
-        <div class="grid">
-            
+        <div class="grid">  
         </div>
     </div>
 

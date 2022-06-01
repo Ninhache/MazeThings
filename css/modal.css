@@ -1,0 +1,68 @@
+.modal {
+    color:#e9ecec;
+    margin: 70px auto;
+    background-color: var(--black);
+    border-radius: 5px;
+    width: 50%;
+    height: 80%;
+    position: sticky;
+    overflow: auto;
+}
+
+.modal-container .content {
+    display: flex;
+    width: auto;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.7);
+    width: 100%;
+    bottom: 0;
+    z-index: 7;
+}
+
+.closeButton {
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    margin-top: 10px;
+    margin-right: 10px;
+    border-radius: 50% 50%;
+    background-color: var(--purple);
+    position: relative;
+    transform: scale(1.3);
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+
+.closeButton::before {
+    background: var(--white);
+    position: absolute;
+    display:block;
+    content:'';
+    width: 70%;
+    height: 6%;
+    top: 47%;
+    left: 15%;
+    transform: rotate(45deg);
+} 
+
+.closeButton::after {
+    background: var(--white);
+    position: absolute;
+    display:block;
+    content:'';
+    width: 6%;
+    height: 70%;
+    left: 47%;
+    top: 15%;
+    transform: rotate(45deg);
+}

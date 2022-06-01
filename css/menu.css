@@ -83,6 +83,10 @@
     transform: translateY(0);
 }
 
+.menu .clear {
+    width: 80%;
+}
+
 .menu > .footer {
     margin: 1em;
 }
@@ -96,7 +100,19 @@
     color: white;
 }
 
-.menu > .footer img {
+.menu .settings {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.menu .settings .gear {
+    cursor: pointer;
+}
+
+.menu .svg {
     width: 35px;
     height: 35px;
 }
